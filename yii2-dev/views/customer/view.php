@@ -4,14 +4,14 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /** @var yii\web\View $this */
-/** @var app\models\Client $model */
+/** @var app\models\Customer $model */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Clients', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Customers', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="client-view">
+<div class="customer-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -31,15 +31,9 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'name',
-            'document',
-            'isActive',
-            'category_id',
             'createdAt',
             'modifiedAt',
         ],
     ]) ?>
-
-    <hr>
-    <?= "Fecha de hoy:". date("H:i:s"); ?>
 
 </div>
