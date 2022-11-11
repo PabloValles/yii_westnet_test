@@ -2,16 +2,16 @@
 
 namespace app\controllers;
 
-use app\models\Client;
-use app\models\ClientSearch;
+use app\models\Customer;
+use app\models\CustomerSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * ClientController implements the CRUD actions for Client model.
+ * CustomerController implements the CRUD actions for Customer model.
  */
-class ClientController extends Controller
+class CustomerController extends Controller
 {
     /**
      * @inheritDoc
@@ -32,13 +32,13 @@ class ClientController extends Controller
     }
 
     /**
-     * Lists all Client models.
+     * Lists all Customer models.
      *
      * @return string
      */
     public function actionIndex()
     {
-        $searchModel = new ClientSearch();
+        $searchModel = new CustomerSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -48,7 +48,7 @@ class ClientController extends Controller
     }
 
     /**
-     * Displays a single Client model.
+     * Displays a single Customer model.
      * @param int $id ID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
@@ -61,24 +61,15 @@ class ClientController extends Controller
     }
 
     /**
-     * Creates a new Client model.
+     * Creates a new Customer model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
-        $model = new Client();
+        $model = new Customer();
 
         if ($this->request->isPost) {
-            // echo "<pre>";
-            // var_dump($this->request->post());
-            // $model->load($this->request->post());
-            // var_dump($model->validate());
-
-            // var_dump($model->getErrorSummary(true));
-
-            //die;
-
             if ($model->load($this->request->post()) && $model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
             }
@@ -87,12 +78,12 @@ class ClientController extends Controller
         }
 
         return $this->render('create', [
-            'model' => $model
+            'model' => $model,
         ]);
     }
 
     /**
-     * Updates an existing Client model.
+     * Updates an existing Customer model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param int $id ID
      * @return string|\yii\web\Response
@@ -101,7 +92,7 @@ class ClientController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        
+
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
@@ -112,7 +103,7 @@ class ClientController extends Controller
     }
 
     /**
-     * Deletes an existing Client model.
+     * Deletes an existing Customer model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param int $id ID
      * @return \yii\web\Response
@@ -126,15 +117,15 @@ class ClientController extends Controller
     }
 
     /**
-     * Finds the Client model based on its primary key value.
+     * Finds the Customer model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param int $id ID
-     * @return Client the loaded model
+     * @return Customer the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Client::findOne(['id' => $id])) !== null) {
+        if (($model = Customer::findOne(['id' => $id])) !== null) {
             return $model;
         }
 
