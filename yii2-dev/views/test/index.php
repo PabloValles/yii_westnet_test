@@ -2,7 +2,6 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-
 ?>
 <?php
   if ($msg) {
@@ -16,7 +15,12 @@ use yii\widgets\ActiveForm;
   <div class="col-md-8">
     <h2>Completa la info del cliente</h2>
     <hr>
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin([
+      "method" => 'post',
+      "id"=>'frm_create',
+      "enableClientValidation" => false,
+      "enableAjaxValidation" => true,
+    ]); ?>
       
       <div class="form-group">
         <?= $form->field($model, 'name') ?>

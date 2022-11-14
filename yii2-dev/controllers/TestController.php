@@ -10,6 +10,9 @@ use yii\web\Controller; // Nos sirve para manipular la vista y el controlador
 use app\models\TestForm;
 use app\models\Country;
 
+use yii\widgets\ActiveForm;
+use yii\web\Response;
+
 
 class TestController extends Controller
 {
@@ -17,7 +20,17 @@ class TestController extends Controller
   {
     $model = new TestForm;
 
-    if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+
+    if ($model->load(Yii::$app->request->post())  && Yii::$app->request->isAjax) {
+      
+      Yii::$app->response->format = Response::FORMAT_JSON;
+
+      return ActiveForm::validate($model);
+
+    }
+
+
+     if ($model->load(Yii::$app->request->post()) && $model->validate()) {
       
       $isActive = ($model->isActive == 1) ? "Activo" : "Inactivo";
       
@@ -25,7 +38,8 @@ class TestController extends Controller
 
       return $this->render('index', ['msg'=>$respuesta, 'model' => $model]);
 
-
+    }else{
+      $model->getErrors();
     }
 
     return $this->render('index', ['msg'=>"", 'model' => $model]);
